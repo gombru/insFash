@@ -36,13 +36,15 @@ def resize(file):
         # print "New width "+str(new_width)
         # print "New height "+str(new_height)
         im = im.resize((new_width, new_height), Image.ANTIALIAS)
-        im.save(im_dest_path + file.split('/')[-1])
+        if not os.path.exists(im_dest_path + file.split('/')[-2]):
+            os.makedirs(im_dest_path + file.split('/')[-2])
+        im.save(im_dest_path + file.split('/')[-2] + '/' +  file.split('/')[-1])
 
     except:
         print "Failed copying image. Removing image and caption"
         try:
-            os.remove(file)
-            os.remove(file.replace("img", "json").replace("jpg", "json"))
+        #    os.remove(file)
+        #    os.remove(file.replace("img", "json").replace("jpg", "json"))
             os.remove(file.replace("img", "json_filtered").replace("jpg", "json"))
         except:
             print "Cannot remove"
@@ -53,4 +55,8 @@ def resize(file):
 
 if not os.path.exists(im_dest_path):
     os.makedirs(im_dest_path)
-Parallel(n_jobs=12)(delayed(resize)(file) for file in glob.glob(images_path + "/*.jpg"))
+dirs = [dI for dI in os.listdir(images_path) if os.path.isdir(os.path.join(images_path, dI))]
+c = 0
+for dir in dirs:
+    print dir
+    Parallel(n_jobs=12)(delayed(resize)(file) for file in glob.glob(images_path + dir + "/*.jpg"))

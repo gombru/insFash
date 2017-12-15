@@ -19,8 +19,8 @@ if finetune:
 
 
 whitelist = string.letters + string.digits + ' '
-instaBCN_text_data_path = '../../../hd/datasets/instaBarcelona/captions.json'
-model_path = '../../../hd/datasets/instaBarcelona/models/word2vec/word2vec_model_instaBarcelona.model'
+instaBCN_text_data_path = '../../../hd/datasets/instaFashion/captions.json'
+model_path = '../../../hd/datasets/instaFashion/models/word2vec/word2vec_model_instaFashion.model'
 words2filter = ['rt','http','t','gt','co','s','https','http','tweet','markars_','photo','pictur','picture','say','photo','much','tweet','now','blog','wikipedia','google', 'flickr', 'figure', 'photo', 'image', 'homepage', 'url', 'youtube','wikipedia','google', 'flickr', 'figure', 'photo', 'image', 'homepage', 'url', 'youtube', 'images', 'blog', 'pinterest']
 
 print "Loading data"
